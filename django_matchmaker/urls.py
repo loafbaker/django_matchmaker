@@ -8,6 +8,7 @@ urlpatterns = [
     # Examples:
     url(r'^$', 'newsletter.views.home', name='home'),
     url(r'^question/$', 'questions.views.home', name='question_home'),
+    url(r'^question/(?P<id>\d+)$', 'questions.views.single', name='question_single'),
     url(r'^contact/$', 'newsletter.views.contact', name='contact'),
     url(r'^about/$', 'django_matchmaker.views.about', name='about'),
     # url(r'^blog/', include('blog.urls')),

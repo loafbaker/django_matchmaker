@@ -36,3 +36,5 @@ Ver.14   [Signals & Receiver Functions](../../tree/1d3eb51ecef7fa0b572b1e1df4758
 Ver.15   [Matching Algorithm](../../tree/983666bf9820d711bc80103c85a19fc470f63c40)
 
 Ver.16   [Matches App](../../tree/d5b149df96b5036e3b197dfd944daa55cd52f6da)
+
+Ver.17   [Get Match Percentage from Algorithm](../../tree/4054ad5ac5537b14403210ff08765ade68780c4d)

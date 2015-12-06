@@ -1,3 +1,5 @@
+import datetime
+from django.utils import timezone
 from django.db import models
 from django.conf import settings
 
@@ -17,15 +19,14 @@ class MatchManager(models.Manager):
             obj_2 = None
 
         if obj:
+            obj.check_update()
             return obj, False
         elif obj_2:
+            obj_2.check_update()
             return obj_2, False
         else:
             new_instance = self.create(user_a=user_a, user_b=user_b)
-            match_decimal, question_answered = get_match(user_a, user_b)
-            new_instance.match_decimal = match_decimal
-            new_instance.questions_answered = question_answered
-            new_instance.save()
+            new_instance.do_match()
             return new_instance, True
 
 
@@ -51,4 +52,11 @@ class Match(models.Model):
         self.questions_answered = question_answered
         self.save()
 
+    def check_update(self):
+        now = timezone.now()
+        offset = now - datetime.timedelta(hours=12)  # 12 hours ago
+        if self.updated <= offset:
+            self.do_match()
+        else:
+            print 'already updated'
 

@@ -72,6 +72,7 @@ if not settings.DEBUG:
 	    'crispy_forms',
 	    'registration',
 	    #my apps
+	    'matches',
 	    'newsletter',
 	    'questions',
 	)

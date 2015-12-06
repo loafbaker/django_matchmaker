@@ -10,7 +10,7 @@
 
   <h3>Your answer</h3>
 {% for ans in instance.answer_set.all %}
-  <input type="radio" name="answer_id" value="{{ ans.id }}" />{{ ans.text }}</br>
+  <input type="radio" name="answer_id" value="{{ ans.id }}" {% if user_answer.my_answer.id == ans.id %}checked="checked"{% endif %} />{{ ans.text }}</br>
 {% endfor %}
 
   <br/>
@@ -18,9 +18,9 @@
 
   <h3>Your coworker's ideal answer</h3>
 {% for ans in instance.answer_set.all %}
-  <input type="radio" name="their_answer_id" value="{{ ans.id }}" />{{ ans.text }}</br>
+  <input type="radio" name="their_answer_id" value="{{ ans.id }}" {% if user_answer.their_answer.id == ans.id %}checked="checked"{% endif %} />{{ ans.text }}</br>
 {% endfor %}
-  <input type="radio" name="their_answer_id" value="-1" />Holds No Importance</br>
+  <input type="radio" name="their_answer_id" value="-1" {% if not user_answer.their_answer %}checked="checked"{% endif %} />Holds No Importance</br>
 
   <br/>
   Importance: {{ form.their_importance_level }}

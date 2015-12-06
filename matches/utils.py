@@ -26,7 +26,10 @@ def get_points(user_a, user_b):
     return percent, num_question
 
 
-match1, n = get_points(david, jmchen)
-match2, n = get_points(jmchen, david)
+def get_match(user_a, user_b):
+    match_decimal_a, number_of_question = get_points(user_a, user_b)
+    match_decimal_b, number_of_question = get_points(user_b, user_a)
 
-match_percentage = (match1 * match2) ** (1./n)
+    match_decimal = (match_decimal_a * match_decimal_b) ** (1./number_of_question)
+    return match_decimal, number_of_question
+

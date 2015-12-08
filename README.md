@@ -40,3 +40,5 @@ Ver.16   [Matches App](../../tree/d5b149df96b5036e3b197dfd944daa55cd52f6da)
 Ver.17   [Get Match Percentage from Algorithm](../../tree/4054ad5ac5537b14403210ff08765ade68780c4d)
 
 Ver.18   [Compare Timezone to Updated Timestamp](../../tree/b4ff34528fd5402498762da62561f1f92af2c984)
+
+Ver.19   [Update Match for QuerySet](../../tree/e821815cce5d741d81a3aa8ca2d17ba8ab788f9a)

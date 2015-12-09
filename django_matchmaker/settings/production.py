@@ -74,6 +74,7 @@ if not settings.DEBUG:
 	    #my apps
 	    'matches',
 	    'newsletter',
+            'profiles',
 	    'questions',
 	)
 

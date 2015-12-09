@@ -42,3 +42,5 @@ Ver.17   [Get Match Percentage from Algorithm](../../tree/4054ad5ac5537b14403210
 Ver.18   [Compare Timezone to Updated Timestamp](../../tree/b4ff34528fd5402498762da62561f1f92af2c984)
 
 Ver.19   [Update Match for QuerySet](../../tree/e821815cce5d741d81a3aa8ca2d17ba8ab788f9a)
+
+Ver.20   [Matching Algorithm Final](../../tree/7998fc6ef205b20fb633d1fe0da55b970fd85c5b)

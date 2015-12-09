@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>{{ profile.user }}</h3>
+<p class="lead">Match: {{ match.get_percent }}</p>
+{% if profile.picture %}
+<img src="{{ profile.picture.url }}" />
+{% endif %}
+
+{% endblock %}

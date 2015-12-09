@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^question/(?P<id>\d+)$', 'questions.views.single', name='question_single'),
     url(r'^contact/$', 'newsletter.views.contact', name='contact'),
     url(r'^about/$', 'django_matchmaker.views.about', name='about'),
+    url(r'^profiles/(?P<username>[\w.@+-]+)$', 'profiles.views.profile_view', name='profile'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),

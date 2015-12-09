@@ -54,6 +54,10 @@ class Match(models.Model):
     def __unicode__(self):
         return '%.2f' % (self.match_decimal)
 
+    @property
+    def get_percent(self):
+        return '%.2f%%' % (self.match_decimal * 100)
+
     def do_match(self):
         user_a = self.user_a
         user_b = self.user_b

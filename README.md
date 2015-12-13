@@ -46,3 +46,5 @@ Ver.19   [Update Match for QuerySet](../../tree/e821815cce5d741d81a3aa8ca2d17ba8
 Ver.20   [Matching Algorithm Final](../../tree/7998fc6ef205b20fb633d1fe0da55b970fd85c5b)
 
 Ver.21   [Profile App and Image Field](../../tree/53fcb39d4c16c79d2daf6f8045b07db62e838656)
+
+Ver.22   [Instance Property for Match Percentage](../../tree/3747a934b6a3ed33217295a54aada77f1311d34e)

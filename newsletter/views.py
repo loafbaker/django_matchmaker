@@ -38,7 +38,7 @@ def home(request):
 				matches.append(item_wanted)
 		queryset = Question.objects.all().order_by('-timestamp')
 		context = {
-			"matches": matches,
+			"matches": matches[:6],
 			"queryset": queryset,
 		}
 	        return render(request, "questions/home.html", context)

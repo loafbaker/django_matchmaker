@@ -1,9 +1,48 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block content %}
 
 
-{{ matches }}
+
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Dashboard</h1>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="col-xs-12">
+      <h3>Matches</h3>
+      <hr/>
+    </div>
+
+{% for match_user, percent in matches %}
+
+
+    <div class="col-xs-4 text-center">
+
+      <a href="{{ match_user.profile.get_absolute_url }}">
+  {{ match_user }}
+      </a>
+
+      <a href="{{ match_user.profile.get_absolute_url }}">
+  {% if match_user.profile.picture %}
+        <img src="{{ match_user.profile.picture.url }}" class="img-responsive center-block img-featured-match" />
+  {% else %}
+        <img src="{% static 'img/profile_default.png' %}" class="img-responsive center-block img-featured-match" />
+  {% endif %}
+      </a>
+
+  {{ percent }}
+
+    </div>
+
+{% endfor %}
+
+  </div>
+
+</div>
 
 <form method="POST" action="">{% csrf_token %}
   <h1>{{ instance.text }}</h1>

@@ -22,3 +22,13 @@ class Profile(models.Model):
     def get_absolute_url(self):
         url = reverse('profile', kwargs={'username':self.user.username})
         return url
+
+
+class UserJob(models.Model):
+    user = models.ForeignKey(User)
+    position = models.CharField(max_length=250)
+    location = models.CharField(max_length=250)
+    employer_name = models.CharField(max_length=250)
+
+    def __unicode__(self):
+        return self.position

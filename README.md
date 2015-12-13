@@ -54,3 +54,5 @@ Ver.23   [Matches on Dashboard](../../tree/91c87d91663ad006feeb0e112fbdd6e33821a
 Ver.24   [Match Images on Dashboard](../../tree/e768e701fcf0792dcb543acec7e7122310462c9a)
 
 Ver.25   [Fix New User Breaking Matching](../../tree/a61eabef9fca9335a07c468179dcde01b6fc62b8)
+
+Ver.26   [Jobs App & Django LocalFlavor](../../tree/30a6f5a1f7de5721451072b4865dacc306b24067)

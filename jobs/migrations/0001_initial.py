@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('text', models.CharField(max_length=120)),
                 ('active', models.BooleanField(default=True)),
-                ('flagged', models.ManyToManyField(to=settings.AUTH_USER_MODEL, null=True, blank=True)),
+                ('flagged', models.ManyToManyField(to=settings.AUTH_USER_MODEL, blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=250)),
                 ('active', models.BooleanField(default=True)),
-                ('flagged', models.ManyToManyField(to=settings.AUTH_USER_MODEL, null=True, blank=True)),
+                ('flagged', models.ManyToManyField(to=settings.AUTH_USER_MODEL, blank=True)),
             ],
         ),
         migrations.AddField(

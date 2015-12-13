@@ -52,3 +52,5 @@ Ver.22   [Instance Property for Match Percentage](../../tree/3747a934b6a3ed33217
 Ver.23   [Matches on Dashboard](../../tree/91c87d91663ad006feeb0e112fbdd6e33821ade8)
 
 Ver.24   [Match Images on Dashboard](../../tree/e768e701fcf0792dcb543acec7e7122310462c9a)
+
+Ver.25   [Fix New User Breaking Matching](../../tree/a61eabef9fca9335a07c468179dcde01b6fc62b8)

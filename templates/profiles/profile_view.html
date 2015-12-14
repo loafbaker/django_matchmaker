@@ -14,4 +14,16 @@
 {% endif %}
 </div>
 
+{% if jobs %}
+
+<div class="row">
+  <ul>
+  {% for job in jobs %}
+    <li>{{ job.position }} - {{ job.location }} at {{ job.employer_name }}</li>
+  {% endfor %}
+  </ul>
+</div>
+
+{% endif %}
+
 {% endblock %}

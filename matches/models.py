@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 
 # Create your models here.
+from jobs.models import Job, Location, Employer
 from .utils import get_match
 class MatchQuerySet(models.query.QuerySet):
     def all(self):
@@ -110,3 +111,32 @@ class Match(models.Model):
         else:
             print 'already updated'
 
+
+class JobMatch(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    job = models.ForeignKey(Job)
+    hidden = models.BooleanField(default=False)
+    liked = models.BooleanField()
+
+    def __unicode__(self):
+        return self.user.username
+
+
+class EmployerMatch(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    employer = models.ForeignKey(Employer)
+    hidden = models.BooleanField(default=False)
+    liked = models.BooleanField()
+
+    def __unicode__(self):
+        return self.user.username
+
+
+class LocationMatch(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    location = models.ForeignKey(Location)
+    hidden = models.BooleanField(default=False)
+    liked = models.BooleanField()
+
+    def __unicode__(self):
+        return self.user.username

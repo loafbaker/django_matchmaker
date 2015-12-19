@@ -10,8 +10,8 @@ class MatchQuerySet(models.query.QuerySet):
         return self.filter(active=True)
 
     def matches(self, user):
-        q1 = self.filter(user_a=user)
-        q2 = self.filter(user_b=user)
+        q1 = self.filter(user_a=user).exclude(user_b=user)
+        q2 = self.filter(user_b=user).exclude(user_a=user)
         return (q1 | q2).distinct()
 
 
@@ -51,8 +51,30 @@ class MatchManager(models.Manager):
             for i in queryset:
                 i.check_update()
 
-    def matches_all(self, user):
-        return self.get_queryset().matches(user)
+    def get_matches(self, user):
+        qs = self.get_queryset().matches(user).order_by('-match_decimal')
+        matches = []
+        for match in qs:
+            if match.user_a == user:
+                item_wanted = [match.user_b]
+                matches.append(item_wanted)
+            elif match.user_b == user:
+                item_wanted = [match.user_a]
+                matches.append(item_wanted)
+        return matches
+
+    def get_matches_with_percent(self, user):
+        qs = self.get_queryset().matches(user).order_by('-match_decimal')
+        matches = []
+        for match in qs:
+            if match.user_a == user:
+                item_wanted = [match.user_b, match.get_percent]
+                matches.append(item_wanted)
+            elif match.user_b == user:
+                item_wanted = [match.user_a, match.get_percent]
+                matches.append(item_wanted)
+        return matches
+
 
 class Match(models.Model):
     user_a = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='match_user_a')

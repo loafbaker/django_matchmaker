@@ -60,3 +60,5 @@ Ver.26   [Jobs App & Django LocalFlavor](../../tree/30a6f5a1f7de5721451072b4865d
 Ver.27   [UserJob Model](../../tree/4dcd9be2b5351395804acd4591c178e56d5e6446)
 
 Ver.28   [View & Add User Job](../../tree/29ef75207f50fb1e2c07d843074973c8ba22c85e)
+
+Ver.29   [Update jobs with Model Formset](../../tree/613f2bd9062d686bd4ad54002c4e9d2ff824caa5)

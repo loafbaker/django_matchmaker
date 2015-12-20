@@ -108,18 +108,54 @@ class Match(models.Model):
         offset = now - datetime.timedelta(hours=12)  # 12 hours ago
         if self.updated <= offset or self.match_decimal == 0.0:
             self.do_match()
+            PositionMatch.objects.update_top_suggestions(self.user_a, 6)
+            PositionMatch.objects.update_top_suggestions(self.user_b, 6)
         else:
             print 'already updated'
 
 
-class JobMatch(models.Model):
+
+class PositionMatchManager(models.Manager):
+    def update_top_suggestions(self, user, match_int):
+        matches = Match.objects.get_matches(user)[:match_int]
+        for match in matches:
+            job_set = match[0].userjob_set.all()
+            if job_set.count() > 0:
+                for job in job_set:
+                    try:
+                        the_job = Job.objects.get(text=job.position.lower())
+                        posmatch, created = self.get_or_create(user=user, job=the_job)
+                    except:
+                        pass
+                    try:
+                        the_loc = Location.objects.get(name=job.location.lower())
+                        locmatch, created = LocationMatch.objects.get_or_create(user=user, location=the_loc)
+                    except:
+                        pass
+                    try:
+                        the_employer = Employer.objects.get(name=job.employer_name.lower(), location=the_loc)
+                        empymatch, created = EmployerMatch.objects.get_or_create(user=user, employer=the_employer)
+                    except:
+                        pass
+
+class PositionMatch(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     job = models.ForeignKey(Job)
     hidden = models.BooleanField(default=False)
     liked = models.NullBooleanField()
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    objects = PositionMatchManager()
 
     def __unicode__(self):
-        return self.user.username
+        return self.job.text
+
+    def check_update(self, match_int):
+        now = timezone.now()
+        offset = now - datetime.timedelta(hours=12)  # 12 hours ago
+        if self.updated <= offset:
+            PositionMatch.objects.update_top_suggestions(self.user, match_int)
+
 
 
 class EmployerMatch(models.Model):

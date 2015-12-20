@@ -45,9 +45,9 @@
       <h3>Suggested Positions</h3>
       <hr/>
     </div>
-{% for position in positions %}
+{% for pos_match in positions %}
     <div class="col-xs-4 text-center">
-      <p class="lead">{{ position }}</p>
+      <p class="lead">{{ pos_match.job.text }}</p>
     </div>
 {% endfor %}
 
@@ -56,9 +56,9 @@
       <h3>Suggested Locations</h3>
       <hr/>
     </div>
-{% for location in locations %}
+{% for loc_match in locations %}
     <div class="col-xs-4 text-center">
-      <p class="lead">{{ location }}</p>
+      <p class="lead">{{ loc_match.location.name }}</p>
     </div>
 {% endfor %}
 
@@ -67,9 +67,9 @@
       <h3>Suggested Employers</h3>
       <hr/>
     </div>
-{% for employer in employers %}
+{% for empy_match in employers %}
     <div class="col-xs-4 text-center">
-      <p class="lead">{{ employer }}</p>
+      <p class="lead">{{ empy_match.employer.name }}</p>
     </div>
 {% endfor %}
 

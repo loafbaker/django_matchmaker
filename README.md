@@ -66,3 +66,5 @@ Ver.29   [Update jobs with Model Formset](../../tree/613f2bd9062d686bd4ad54002c4
 Ver.30   [Get Matches QuerySet Update](../../tree/b4a1ce262d205cf182ba6a44d394cc5baa6539fd)
 
 Ver.31   [Job, Location, Employer Matches](../../tree/b5690727b69ed9044a1fa3d0b4345df505ef0be9)
+
+Ver.32   [Suggestion Position, Location, Employer](../../tree/34f4f49d0b7e364c9fb6d25de9f6ee247fb091e7)

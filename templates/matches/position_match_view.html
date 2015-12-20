@@ -2,6 +2,16 @@
 
 {% block content %}
 
-
 {{ instance }}
+
+{% for match in matches %}
+
+{{ match.user }}
+
+  {% if match.user.profile.picture %}
+<img src="{{ match.user.profile.picture.url }}" />
+  {% endif %}
+
+{% endfor %}
+
 {% endblock %}

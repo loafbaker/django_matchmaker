@@ -34,7 +34,7 @@ def home(request):
 		locations = LocationMatch.objects.filter(user=request.user)[:6]
 		employers = EmployerMatch.objects.filter(user=request.user)[:6]
 
-		if positions.count > 0:
+		if positions.count() > 0:
 			positions[0].check_update(20) # 20 matches total
 
 		queryset = Question.objects.all().order_by('-timestamp')

@@ -49,7 +49,7 @@ class MatchManager(models.Manager):
         offset = now - datetime.timedelta(hours=12)
         offset2 = now - datetime.timedelta(hours=36) 
         queryset.filter(updated__gt=offset2).filter(updated__lte=offset)
-        if queryset.count > 0:
+        if queryset.count() > 0:
             for i in queryset:
                 i.check_update()
 

@@ -5,5 +5,10 @@ from django.contrib import admin
 
 
 urlpatterns = [
-    url(r'^position/(?P<slug>[\w-]+)$', 'matches.views.position_match_view', name='position_match_view'),
+    url(r'^position/(?P<slug>[\w-]+)$', 'matches.views.position_match_view', 
+        name='position_match_view'),
+    url(r'^location/(?P<slug>[\w-]+)$', 'matches.views.location_match_view', 
+        name='location_match_view'),
+    url(r'^employer/(?P<slug>[\w-]+)$', 'matches.views.employer_match_view', 
+        name='employer_match_view'),
 ]

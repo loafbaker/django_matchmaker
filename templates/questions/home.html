@@ -47,7 +47,7 @@
     </div>
 {% for pos_match in positions %}
     <div class="col-xs-4 text-center">
-      <p class="lead"><a href="{% url 'position_match_view' pos_match.job.slug %}">{{ pos_match.job.text }}</a></p>
+      <p class="lead"><a href="{{ pos_match.get_match_url }}">{{ pos_match.job.text }}</a></p>
     </div>
 {% endfor %}
 
@@ -58,7 +58,7 @@
     </div>
 {% for loc_match in locations %}
     <div class="col-xs-4 text-center">
-      <p class="lead">{{ loc_match.location.name }}</p>
+      <p class="lead"><a href="{{ loc_match.get_match_url }}">{{ loc_match.location.name }}</a></p>
     </div>
 {% endfor %}
 
@@ -69,7 +69,7 @@
     </div>
 {% for empy_match in employers %}
     <div class="col-xs-4 text-center">
-      <p class="lead">{{ empy_match.employer.name }}</p>
+      <p class="lead"><a href="{{ empy_match.get_match_url }}">{{ empy_match.employer.name }}</a></p>
     </div>
 {% endfor %}
 
@@ -78,8 +78,5 @@
 
 </div>
 
-{{ positions }}
-{{ locations }}
-{{ employers }}
 
 {% endblock %}

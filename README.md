@@ -70,3 +70,5 @@ Ver.31   [Job, Location, Employer Matches](../../tree/b5690727b69ed9044a1fa3d0b4
 Ver.32   [Suggestion Position, Location, Employer](../../tree/34f4f49d0b7e364c9fb6d25de9f6ee247fb091e7)
 
 Ver.33   [Position Matches](../../tree/67764128a39c608c91bdd8b036f9b7917acd4c42)
+
+Ver.34   [SlugFields](../../tree/108b778c4980a8693deef717f0634d1402c319a9)

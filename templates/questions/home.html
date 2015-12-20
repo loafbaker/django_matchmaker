@@ -47,7 +47,7 @@
     </div>
 {% for pos_match in positions %}
     <div class="col-xs-4 text-center">
-      <p class="lead">{{ pos_match.job.text }}</p>
+      <p class="lead"><a href="{% url 'position_match_view' pos_match.job.slug %}">{{ pos_match.job.text }}</a></p>
     </div>
 {% endfor %}
 

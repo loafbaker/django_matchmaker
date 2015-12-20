@@ -2,7 +2,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render
 
-from matches.models import Match
+from jobs.models import Job, Employer, Location
+from matches.models import Match, JobMatch, EmployerMatch, LocationMatch
 from questions.models import Question
 from .forms import ContactForm, SignUpForm
 from .models import SignUp
@@ -28,10 +29,41 @@ def home(request):
 
 	if request.user.is_authenticated():
 		matches = Match.objects.get_matches_with_percent(request.user)[:6]
+		positions = []
+		locations = []
+		employers = []
+		for match in matches:
+			job_set = match[0].userjob_set.all()
+			if job_set.count() > 0:
+				for job in job_set:
+					if job.position not in positions:
+						positions.append(job.position)
+						try:
+							the_job = Job.objects.get(text=job.position.lower())
+							jobmatch, created = JobMatch.objects.get_or_create(user=request.user, job=the_job)
+						except:
+							pass
+					if job.location not in locations:
+						locations.append(job.location)
+						try:
+							the_loc = Location.objects.get(name=job.location.lower())
+							locmatch, created = LocationMatch.objects.get_or_create(user=request.user, location=the_loc)
+						except:
+							pass
+					if job.employer_name not in employers:
+						employers.append(job.employer_name)
+						try:
+							the_employer = Employer.objects.get(name=job.employer_name.lower(), location=the_loc)
+							empymatch, created = EmployerMatch.objects.get_or_create(user=request.user, employer=the_employer)
+						except:
+							pass
 		queryset = Question.objects.all().order_by('-timestamp')
 		context = {
 			"matches": matches,
 			"queryset": queryset,
+			"positions": positions,
+			"locations": locations,
+			"employers": employers,
 		}
 		return render(request, "questions/home.html", context)
 

@@ -1,5 +1,6 @@
 import datetime
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.conf import settings
 
@@ -156,6 +157,11 @@ class PositionMatch(models.Model):
         if self.updated <= offset:
             PositionMatch.objects.update_top_suggestions(self.user, match_int)
 
+    @property
+    def get_match_url(self):
+        return reverse('job_match_view', kwargs={'slug': self.job.slug})
+
+
 
 
 class EmployerMatch(models.Model):
@@ -167,6 +173,10 @@ class EmployerMatch(models.Model):
     def __unicode__(self):
         return self.user.username
 
+    @property
+    def get_match_url(self):
+        return reverse('employer_match_view', kwargs={'slug': self.employer.slug})
+
 
 class LocationMatch(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -176,3 +186,7 @@ class LocationMatch(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+    @property
+    def get_match_url(self):
+        return reverse('location_match_view', kwargs={'slug': self.location.slug})

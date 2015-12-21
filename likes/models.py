@@ -6,8 +6,11 @@ from django.conf import settings
 User = settings.AUTH_USER_MODEL
 
 class UserLikeManager(models.Manager):
-	def get_all_mutual_likes(self, user):
-		qs = user.liker.liked_users.all().order_by('?')
+	def get_all_mutual_likes(self, user, number):
+		try:
+			qs = user.liker.liked_users.all().order_by('?')
+		except:
+			return []
 		mutual_users = []
 		for other_user in qs:
 			try:
@@ -15,7 +18,7 @@ class UserLikeManager(models.Manager):
 					mutual_users.append(other_user)
 			except:
 				pass
-		return mutual_users
+		return mutual_users[:number]
 
 
 class UserLike(models.Model):

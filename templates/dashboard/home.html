@@ -4,38 +4,42 @@
 
 {% block content %}
 
+{% if new_user %}
 
+<h1>Welcome New User</h1>
+
+{% else %}
 
 <div class="row">
   <div class="col-sm-8">
     <h1>Dashboard</h1>
 
-{% if mutual_likes %}
+  {% if mutual_likes %}
     <div class="col-sm-12">
       <h3>Mutual Interest</h3>
 
-  {% for liked_user in mutual_likes %}
+    {% for liked_user in mutual_likes %}
       <div class="col-xs-3 text-center">
 
         <a href="{{ liked_user.profile.get_absolute_url }}">
-    {{ liked_user }}
+      {{ liked_user }}
         </a>
 
         <a href="{{ liked_user.profile.get_absolute_url }}">
-    {% if liked_user.profile.picture %}
+      {% if liked_user.profile.picture %}
           <img src="{{ liked_user.profile.picture.url }}" class="img-responsive center-block img-featured-match" />
-    {% else %}
+      {% else %}
           <img src="{% static 'img/profile_default.png' %}" class="img-responsive center-block img-featured-match" />
-    {% endif %}
+      {% endif %}
         </a>
 
-    {{ percent }}
+      {{ percent }}
 
       </div>
-  {% endfor %}
+    {% endfor %}
 
     </div>
-{% endif %}
+  {% endif %}
 
   </div>
 
@@ -45,66 +49,66 @@
       <hr/>
     </div>
 
-{% for match_user, percent in matches %}
+  {% for match_user, percent in matches %}
 
 
     <div class="col-xs-4 text-center">
 
       <a href="{{ match_user.profile.get_absolute_url }}">
-  {{ match_user }}
+    {{ match_user }}
       </a>
 
       <a href="{{ match_user.profile.get_absolute_url }}">
-  {% if match_user.profile.picture %}
+    {% if match_user.profile.picture %}
         <img src="{{ match_user.profile.picture.url }}" class="img-responsive center-block img-featured-match" />
-  {% else %}
+    {% else %}
         <img src="{% static 'img/profile_default.png' %}" class="img-responsive center-block img-featured-match" />
-  {% endif %}
+    {% endif %}
       </a>
 
-  {{ percent }}
+    {{ percent }}
 
     </div>
 
-{% endfor %}
-
+  {% endfor %}
 
     <div class="col-xs-12">
       <h3>Suggested Positions</h3>
       <hr/>
     </div>
-{% for pos_match in positions %}
+  {% for pos_match in positions %}
     <div class="col-xs-4 text-center">
       <p class="lead"><a href="{{ pos_match.get_match_url }}">{{ pos_match.job.text }}</a></p>
     </div>
-{% endfor %}
+  {% endfor %}
 
 
     <div class="col-xs-12">
       <h3>Suggested Locations</h3>
       <hr/>
     </div>
-{% for loc_match in locations %}
+  {% for loc_match in locations %}
     <div class="col-xs-4 text-center">
       <p class="lead"><a href="{{ loc_match.get_match_url }}">{{ loc_match.location.name }}</a></p>
     </div>
-{% endfor %}
+  {% endfor %}
 
 
     <div class="col-xs-12">
       <h3>Suggested Employers</h3>
       <hr/>
     </div>
-{% for empy_match in employers %}
+  {% for empy_match in employers %}
     <div class="col-xs-4 text-center">
       <p class="lead"><a href="{{ empy_match.get_match_url }}">{{ empy_match.employer.name }}</a></p>
     </div>
-{% endfor %}
+  {% endfor %}
 
   </div>
 
-
 </div>
+
+{% endif %}
 
 
 {% endblock %}

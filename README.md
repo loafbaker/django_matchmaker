@@ -80,3 +80,5 @@ Ver.36   [Location & Employer Match Views](../../tree/f470b2c752b6e88782675e597f
 Ver.37   [User Logged in Signal](../../tree/0aecb7cab85033893e3bd657cd82aefe51a27696)
 
 Ver.38   [User Like](../../tree/93b6d9c1a3eee04f019f708c133206ebe331c0ee)
+
+Ver.39   [Perform Like in a View](../../tree/e5ffd6ea90cb86390c574256842d3a1b94addf7f)

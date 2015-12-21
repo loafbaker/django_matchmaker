@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render
 
 from jobs.models import Job, Employer, Location
+from likes.models import UserLike
 from matches.models import Match, PositionMatch, EmployerMatch, LocationMatch
 from questions.models import Question
 from .forms import ContactForm, SignUpForm
@@ -37,6 +38,8 @@ def home(request):
 		if positions.count() > 0:
 			positions[0].check_update(20) # 20 matches total
 
+		mutual_likes = UserLike.objects.get_all_mutual_likes(request.user)[:4]
+
 		queryset = Question.objects.all().order_by('-timestamp')
 		context = {
 			"matches": matches,
@@ -44,6 +47,7 @@ def home(request):
 			"positions": positions,
 			"locations": locations,
 			"employers": employers,
+			"mutual_likes": mutual_likes,
 		}
 		return render(request, "questions/home.html", context)
 

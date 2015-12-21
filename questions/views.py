@@ -47,8 +47,12 @@ def single(request, id):
                 user_answer.their_answer_importance = 'Not Important'
             user_answer.save()
 
-            next_q = Question.objects.order_by('?').first()
-            return redirect('question_single', id=next_q.id)
+            next_q = Question.objects.get_unanswered(request.user).order_by('?')
+            if next_q.count() > 0:
+                next_q_instance = next_q.first()
+                return redirect('question_single', id=next_q_instance.id)
+            else:
+                return redirect('home')
         context = {
             'form': form,
             'instance': instance,

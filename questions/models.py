@@ -1,13 +1,22 @@
 from django.db import models
 from django.conf import settings
+from django.db.models import Q
 
 # Create your models here.
+
+class QuestionManager(models.Manager):
+    def get_unanswered(self, user):
+        q1 = Q(useranswer__user=user)
+        qs = self.exclude(q1)
+        return qs
 
 class Question(models.Model):
     text = models.TextField()
     active = models.BooleanField(default=True)
     draft = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    objects = QuestionManager()
 
     def __unicode__(self):
         return self.text[:10]

@@ -14,6 +14,10 @@
 {% endif %}
 </div>
 
+<a href="{{ profile.like_link }}">
+{% if do_i_like %}Unlike{% else %}Like{% endif %}
+</a>
+
 {% if mutual_like %}
 <p class="lead">
   You are connected!

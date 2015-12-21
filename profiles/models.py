@@ -23,6 +23,10 @@ class Profile(models.Model):
         url = reverse('profile', kwargs={'username':self.user.username})
         return url
 
+    def like_link(self):
+        url = reverse('like_user', kwargs={'id': self.user.id})
+        return url
+
 
 class UserJob(models.Model):
     user = models.ForeignKey(User)

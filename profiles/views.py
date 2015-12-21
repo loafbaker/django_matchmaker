@@ -18,6 +18,9 @@ def profile_view(request, username):
     user = get_object_or_404(User, username=username)
     profile, created = Profile.objects.get_or_create(user=user)
     user_like, user_like_created = UserLike.objects.get_or_create(user=request.user)
+    do_i_like = False
+    if user in user_like.liked_users.all():
+        do_i_like = True
     mutual_like = user_like.get_mutual_like(user)
     match, match_created = Match.objects.get_or_create_match(user_a=request.user, user_b=user)
     jobs = user.userjob_set.all()
@@ -26,6 +29,7 @@ def profile_view(request, username):
         'match': match,
         'jobs': jobs,
         'mutual_like': mutual_like,
+        'do_i_like': do_i_like,
      }
     return render(request, 'profiles/profile_view.html', context)
 

@@ -74,6 +74,7 @@ if not settings.DEBUG:
 	    'registration',
 	    #my apps
 	    'jobs',
+	    'likes',
 	    'matches',
 	    'newsletter',
             'profiles',

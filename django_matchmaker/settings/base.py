@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'registration',
     #my apps
     'jobs',
+    'likes',
     'matches',
     'newsletter',
     'profiles',

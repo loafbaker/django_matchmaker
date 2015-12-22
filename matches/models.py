@@ -43,6 +43,12 @@ class MatchManager(models.Manager):
             new_instance.do_match()
             return new_instance, True
 
+    def update_for_user(self, user):
+        qs = self.get_queryset().matches(user)
+        for instance in qs:
+            instance.do_match()
+        return True
+
     def update_all(self):
         queryset = self.all()
         now = timezone.now()

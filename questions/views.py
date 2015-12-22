@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 
 # Create your views here.
+from matches.signals import user_matches_update
 from .models import Question, Answer, UserAnswer
 from .forms import UserResponseForm
 
@@ -51,6 +52,8 @@ def single(request, id):
                 user_answer.their_answer = None
                 user_answer.their_answer_importance = 'Not Important'
             user_answer.save()
+
+            user_matches_update.send(user=request.user, sender=user_answer.__class__)
 
             if updated_q:
                 messages.success(request, 'Your response was updated successfully. <a href="#">Nice.</a>', extra_tags='safe')

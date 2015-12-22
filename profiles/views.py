@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.forms.models import modelformset_factory
@@ -12,6 +12,18 @@ from matches.models import Match
 from likes.models import UserLike
 
 User = get_user_model()
+
+
+@login_required
+def profile_user(request):
+    user = request.user
+    profile, created = Profile.objects.get_or_create(user=user)
+    jobs = user.userjob_set.all()
+    context = {
+        'profile': profile,
+        'jobs': jobs,
+     }
+    return render(request, 'profiles/profile_user.html', context)
 
 @login_required
 def profile_view(request, username):
@@ -41,6 +53,7 @@ def job_add(request):
         instance = form.save(commit=False)
         instance.user = request.user
         instance.save()
+        return redirect('profile_user')
     context = {
         'form': form,
         'title': title,
@@ -58,6 +71,7 @@ def jobs_edit(request):
         for instance in instances:
             instance.user = request.user
             instance.save()
+        return redirect('profile_user')
     context = {
         'formset': formset,
         'title': title,

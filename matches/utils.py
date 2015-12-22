@@ -36,6 +36,10 @@ def get_match(user_a, user_b):
                 a_points = b.their_points
             a_total_points += b.their_points
 
+    # Avoid zero or negative divisor
+    a_total_points = max(a_total_points, 1e-6)
+    b_total_points = max(b_total_points, 1e-6)
+
     if questions_in_common > 0:
         a_decimal = a_points / float(a_total_points)
         b_decimal = b_points / float(b_total_points)

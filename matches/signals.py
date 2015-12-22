@@ -3,7 +3,7 @@ from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
 from django.dispatch import Signal
 
-from .models import Match
+from .models import Match, PositionMatch
 
 
 User = get_user_model()
@@ -18,6 +18,6 @@ user_matches_update = Signal(providing_args=['user'])
 
 def user_matches_update_receiver(sender, user, *args, **kwargs):
 	updated = Match.objects.update_for_user(user)
-	print updated
+	update_top_suggestions = PositionMatch.objects.update_top_suggestions(user, 20)
 
 user_matches_update.connect(user_matches_update_receiver)

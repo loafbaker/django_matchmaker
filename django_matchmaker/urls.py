@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^contact/$', 'newsletter.views.contact', name='contact'),
     url(r'^about/$', 'django_matchmaker.views.about', name='about'),
     url(r'^like/(?P<id>\d+)$', 'likes.views.like_user', name='like_user'),
+    url(r'^profile/edit/$', 'profiles.views.profile_edit', name='profile_edit'),
     url(r'^profile/(?P<username>[\w.@+-]+)$', 'profiles.views.profile_view', name='profile'),
     url(r'^profile/jobs/add/$', 'profiles.views.job_add', name='job_add'),
     url(r'^profile/jobs/edit/$', 'profiles.views.jobs_edit', name='jobs_edit'),

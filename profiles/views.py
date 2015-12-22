@@ -5,7 +5,7 @@ from django.forms.models import modelformset_factory
 from django.http import Http404
 
 # Create your views here.
-from .forms import UserJobForm
+from .forms import ProfileForm, UserJobForm
 from .models import Profile, UserJob
 
 from matches.models import Match
@@ -24,6 +24,22 @@ def profile_user(request):
         'jobs': jobs,
      }
     return render(request, 'profiles/profile_user.html', context)
+
+@login_required
+def profile_edit(request):
+    title = 'Update Profile'
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    form = ProfileForm(request.POST or None, request.FILES or None, instance=profile)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.user = request.user
+        instance.save()
+        return redirect('profile_user')
+    context = {
+        'form': form,
+        'title': title,
+     }
+    return render(request, 'forms.html', context)
 
 @login_required
 def profile_view(request, username):

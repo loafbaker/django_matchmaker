@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 
 # Create your views here.
 from .models import Question, Answer, UserAnswer
@@ -13,12 +14,16 @@ def single(request, id):
 
         try:
             user_answer = UserAnswer.objects.get(user=request.user,question=instance)
+            updated_q = True
         except UserAnswer.DoesNotExist:
             user_answer = UserAnswer()
+            updated_q = False
         except UserAnswer.MultipleObjectsReturned:
             user_answer = UserAnswer.objects.filter(user=request.user,question=instance)[0]
+            updated_q = True
         except:
             user_answer = UserAnswer()
+            updated_q = False
 
         form = UserResponseForm(request.POST or None)
         if form.is_valid():
@@ -46,6 +51,11 @@ def single(request, id):
                 user_answer.their_answer = None
                 user_answer.their_answer_importance = 'Not Important'
             user_answer.save()
+
+            if updated_q:
+                messages.success(request, 'Your response was updated successfully. <a href="#">Nice.</a>', extra_tags='safe')
+            else:
+                messages.success(request, 'Your response was saved successfully.')
 
             next_q = Question.objects.get_unanswered(request.user).order_by('?')
             if next_q.count() > 0:

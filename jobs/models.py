@@ -13,7 +13,7 @@ class Job(models.Model):
     flagged = models.ManyToManyField(User, blank=True) # warning
     #users = models.ManyToManyField(User, null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
 
@@ -23,20 +23,19 @@ class Location(models.Model):
     active = models.BooleanField(default=True)
     flagged = models.ManyToManyField(User, blank=True) # warning
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
 class Employer(models.Model):
     name = models.CharField(max_length=250)
-    location = models.ForeignKey(Location, null=True, blank=True)
+    location = models.ForeignKey(Location, null=True, blank=True, on_delete=models.CASCADE)
     slug = models.SlugField()
     # state = USStateField(null=True, blank=True)
     # website, lat_lang, etc.
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
         unique_together = ('name', 'location')
-

@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class MatchConfig(AppConfig):
-    name = "matches"
-    verbose_name = 'Matches'
+class MatchesConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'matches'
 
     def ready(self):
-        from . import signals
+        import matches.signals

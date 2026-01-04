@@ -1,5 +1,5 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 # Create your models here.
 
@@ -22,12 +22,12 @@ class UserLikeManager(models.Manager):
 
 
 class UserLike(models.Model):
-	user = models.OneToOneField(User, related_name='liker')
+	user = models.OneToOneField(User, related_name='liker', on_delete=models.CASCADE)
 	liked_users = models.ManyToManyField(User, related_name='liked_users', blank=True)
 
 	objects = UserLikeManager()
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.user.username
 
 	def get_mutual_like(self, user_b):
@@ -41,4 +41,3 @@ class UserLike(models.Model):
 			u_like = True
 
 		return i_like and u_like
-

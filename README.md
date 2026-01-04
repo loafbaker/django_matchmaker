@@ -3,7 +3,14 @@ django_matchmaker
 
 A typical recomendation system built by django framework
 
-Run in django 1.8.5 and sqlite3
+Run in Django 5.2 and Python 3.10, with support from Bootstrap 3 and sqlite3.
+
+## Updated version in 2026
+
+- Upgrade to Django 5.2
+- Migrate from Python 2 to Python 3
+
+## Minor version for Django 1.8.5 (Deprecated)
 
 Ver.1   [Start Here](../../tree/6931ec46ba14d80b564e245ff13abdad215fde5e)
 

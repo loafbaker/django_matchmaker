@@ -15,7 +15,7 @@ from newsletter.models import SignUp
 # Create your views here.
 def home(request):
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         matches = Match.objects.get_matches_with_percent(request.user)[:6]
         PositionMatch.objects.update_top_suggestions(request.user, 20)
         positions = PositionMatch.objects.filter(user=request.user)[:6]

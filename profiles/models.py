@@ -1,8 +1,8 @@
+from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
-from django.conf import settings
-from django.core.urlresolvers import reverse
 
 User = settings.AUTH_USER_MODEL
 
@@ -12,11 +12,11 @@ def upload_location(instance,filename):
     return '%s/%s' % (location, filename)
 
 class Profile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=120, null=True, blank=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 
     def get_absolute_url(self):
@@ -29,10 +29,10 @@ class Profile(models.Model):
 
 
 class UserJob(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     position = models.CharField(max_length=250)
     location = models.CharField(max_length=250)
     employer_name = models.CharField(max_length=250)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.position

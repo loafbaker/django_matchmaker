@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class UserJobConfig(AppConfig):
-    name = "profiles"
-    verbose_name = 'User Jobs'
+class ProfilesConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'profiles'
 
     def ready(self):
-        from . import signals
+        import profiles.signals

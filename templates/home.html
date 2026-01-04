@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% load staticfiles %}
+{% load static %}
 
 
 {% block head_title %}Welcome | {{ block.super }}{% endblock %}
@@ -35,7 +35,7 @@
 		</p>
 		</div>
 		<div class='col-sm-6' >
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/zKx2B8WCQuw" frameborder="0" allowfullscreen></iframe>
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/zKx2B8WCQuw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
  		</div>
 		</div>

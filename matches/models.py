@@ -1,12 +1,13 @@
 import datetime
-from django.utils import timezone
-from django.core.urlresolvers import reverse
-from django.db import models
 from django.conf import settings
+from django.db import models
+from django.urls import reverse
+from django.utils import timezone
 
 # Create your models here.
 from jobs.models import Job, Location, Employer
 from .utils import get_match
+
 class MatchQuerySet(models.query.QuerySet):
     def all(self):
         return self.filter(active=True)
@@ -53,7 +54,7 @@ class MatchManager(models.Manager):
         queryset = self.all()
         now = timezone.now()
         offset = now - datetime.timedelta(hours=12)
-        offset2 = now - datetime.timedelta(hours=36) 
+        offset2 = now - datetime.timedelta(hours=36)
         queryset.filter(updated__gt=offset2).filter(updated__lte=offset)
         if queryset.count() > 0:
             for i in queryset:
@@ -85,8 +86,8 @@ class MatchManager(models.Manager):
 
 
 class Match(models.Model):
-    user_a = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='match_user_a')
-    user_b = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='match_user_b')
+    user_a = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='match_user_a', on_delete=models.CASCADE)
+    user_b = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='match_user_b', on_delete=models.CASCADE)
     match_decimal = models.DecimalField(default=0.00, decimal_places=8, max_digits=16)
     questions_answered = models.IntegerField(default=0)
     # is good match?
@@ -95,7 +96,7 @@ class Match(models.Model):
 
     objects = MatchManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return '%.2f' % (self.match_decimal)
 
     @property
@@ -118,7 +119,7 @@ class Match(models.Model):
             PositionMatch.objects.update_top_suggestions(self.user_a, 6)
             PositionMatch.objects.update_top_suggestions(self.user_b, 6)
         else:
-            print 'already updated'
+            print('already updated')
 
 
 
@@ -146,15 +147,15 @@ class PositionMatchManager(models.Manager):
                         pass
 
 class PositionMatch(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    job = models.ForeignKey(Job)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
-    liked = models.NullBooleanField()
+    liked = models.BooleanField(null=True, blank=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     objects = PositionMatchManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.job.text
 
     def check_update(self, match_int):
@@ -165,34 +166,34 @@ class PositionMatch(models.Model):
 
     @property
     def get_match_url(self):
-        return reverse('position_match_view', kwargs={'slug': self.job.slug})
+        return reverse('matches:position_match_view', kwargs={'slug': self.job.slug})
 
 
 
 
 class EmployerMatch(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    employer = models.ForeignKey(Employer)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
-    liked = models.NullBooleanField()
+    liked = models.BooleanField(null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 
     @property
     def get_match_url(self):
-        return reverse('employer_match_view', kwargs={'slug': self.employer.slug})
+        return reverse('matches:employer_match_view', kwargs={'slug': self.employer.slug})
 
 
 class LocationMatch(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    location = models.ForeignKey(Location)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
-    liked = models.NullBooleanField()
+    liked = models.BooleanField(null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 
     @property
     def get_match_url(self):
-        return reverse('location_match_view', kwargs={'slug': self.location.slug})
+        return reverse('matches:location_match_view', kwargs={'slug': self.location.slug})

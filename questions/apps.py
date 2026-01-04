@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class UserAnswerConfig(AppConfig):
-    name = "questions"
-    verbose_name = 'User Answers'
+class QuestionsConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'questions'
 
     def ready(self):
-        from . import signals
+        import questions.signals

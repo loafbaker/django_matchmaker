@@ -9,5 +9,6 @@ Run in Django 5.2 and Python 3.10, with support from Bootstrap 3 and sqlite3.
 
 - Upgrade to Django 5.2
 - Migrate from Python 2 to Python 3
+- Add `uv` support
 
 Development records in Django 1.8.5 have been moved to [DEPRECATED.md](DEPRECATED.md).

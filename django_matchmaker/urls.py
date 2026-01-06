@@ -30,18 +30,18 @@ from . import views as django_matchmaker_views
 urlpatterns = [
     path('', dashboard_views.home, name='home'),
     path('question/', questions_views.home, name='question_home'),
-    re_path(r'^question/(?P<id>\d+)$', questions_views.single, name='question_single'),
+    path('question/<int:id>/', questions_views.single, name='question_single'),
     path('contact/', newsletter_views.contact, name='contact'),
     path('about/', django_matchmaker_views.about, name='about'),
-    re_path(r'^like/(?P<id>\d+)$', likes_views.like_user, name='like_user'),
+    path('like/<int:id>/', likes_views.like_user, name='like_user'),
     path('profile/edit/', profiles_views.profile_edit, name='profile_edit'),
     re_path(r'^profile/(?P<username>[\w.@+-]+)$', profiles_views.profile_view, name='profile'),
     path('profile/jobs/add/', profiles_views.job_add, name='job_add'),
     path('profile/jobs/edit/', profiles_views.jobs_edit, name='jobs_edit'),
     path('profile/', profiles_views.profile_user, name='profile_user'),
-    # path('blog/', include('blog.urls')),
+    # path('blog/', include('blog.urls', namespace='blog')),
 
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.default.urls')),
-    path('matches/', include('matches.urls')),
+    path('matches/', include('matches.urls', namespace='matches')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
